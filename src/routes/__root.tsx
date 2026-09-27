@@ -118,6 +118,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     scripts: [
+      // 0. Taboola Loader Script (ADD THIS)
+      {
+        children: `
+          window._taboola = window._taboola || [];
+          _taboola.push({ article: 'auto' });
+          !function (e, f, u, i) {
+            if (!document.getElementById(i)) {
+              e.async = 1; e.src = u; e.id = i;
+              f.parentNode.insertBefore(e, f);
+            }
+          }(document.createElement('script'),
+            document.getElementsByTagName('script')[0],
+            '//cdn.taboola.com/libtrc/jagrannewmedia-jagran/loader.js',
+            'tb_loader_script');
+          if (window.performance && typeof window.performance.mark == 'function') {
+            window.performance.mark('tbl_ic');
+          }
+        `,
+      },
       // 1. GPT loader — must come before the config script
       {
         src: "https://securepubads.g.doubleclick.net/tag/js/gpt.js",

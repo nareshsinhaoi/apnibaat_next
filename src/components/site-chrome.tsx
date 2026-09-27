@@ -66,7 +66,7 @@ export function SiteHeader() {
         scrolled ? "shadow-[0_2px_20px_-8px_oklch(0.2_0.02_260_/_0.15)]" : ""
       }`}
     >
-      <div className="border-b border-border bg-muted/50">
+      <div className="border-b border-border bg-muted/50 hidden sm:flex">
         <div className="content-shell flex h-9 items-center justify-between font-sans text-[0.68rem] text-muted-foreground">
           <span className="truncate">{currentDate || "\u00A0"}</span>
           <span className="hidden items-center gap-3 sm:flex">

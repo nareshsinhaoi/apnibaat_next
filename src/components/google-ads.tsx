@@ -88,12 +88,12 @@ export function DisplayAd({ size = "billboard", className = "", label = "वि�
   }
 
   return (
-    <div className={`my-6 ${className}`}>
-      {label ? (
+    <div className={`my-6xxxxxxx ${className}`}>
+      {/* {label ? (
         <p className="mb-1 text-center font-sans text-[0.6rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">
           {label}
         </p>
-      ) : null}
+      ) : null} */}
       <div className={`${SIZE_CLASSES[size]} overflow-hidden rounded-md`}>
         <div id={DISPLAY_SLOT_ID} className="h-full w-full" />
       </div>

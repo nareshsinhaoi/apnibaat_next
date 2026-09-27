@@ -410,3 +410,120 @@ body:has(#div-gpt-ad-anchor:not(:empty)) footer {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+ /* =========================================
+   Advertisement Strip
+   ========================================= */
+
+.webAds {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topads {
+  min-height: 90px;
+  width: 100%;
+}
+
+.advertiseTxt {
+  position: relative;
+  padding-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.advertiseTxt:after {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  top: 5px;
+  bottom: 0;
+  content: "advertisement";
+  text-transform: uppercase;
+  font-size: 7px;
+  color: #888;
+  display: flex;
+  justify-content: center;
+  height: 10px;
+  line-height: 10px;
+  pointer-events: none;
+  letter-spacing: 0.15em;
+}
+
+.advertise {
+  width: 100%;
+  max-width: 750px;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.advertise-link {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+}
+
+.advertise-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* ---------- RESPONSIVE SWAP ---------- */
+
+/* Desktop (default) — hide mobile ad */
+.advertise-desktop {
+  display: block;
+}
+
+.advertise-mobile {
+  display: none;
+}
+
+/* Mobile (below 768px) — hide desktop ad, show mobile ad */
+@media (max-width: 767px) {
+  .advertise-desktop {
+    display: none !important;
+  }
+
+  .advertise-mobile {
+    display: block !important;
+  }
+
+  .advertise {
+    max-width: 320px;
+    min-height: 50px;
+  }
+
+  .advertiseTxt:after {
+    font-size: 6px;
+  }
+}
+
+/* Dark mode */
+.dark .advertiseTxt:after {
+  color: #8b8a99;
+}
+
+.advertise-placeholder {
+  font-size: 11px;
+  color: #b0b0b8;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 30px 0;
+}
+
+.dark .advertise-placeholder {
+  color: #4a4a55;
+}

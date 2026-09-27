@@ -4,6 +4,10 @@ import { DataWaiting, NewsCard, SectionTitle } from "@/components/newsroom";
 import { Newsletter } from "@/components/site-chrome";
 import { formatDate, newsDetailQuery } from "@/lib/api";
 import { DisplayAd } from "@/components/google-ads";
+import { AdBanner } from "@/components/ad-banner";
+import { headerAd } from "@/lib/ads";
+import { TaboolaWidget } from '@/components/taboola-widget';
+import { VdoAiAd } from "@/components/vdo-ai-ad";
 
 const SITE_URL = "https://apnibaat.com";
 
@@ -99,85 +103,159 @@ function ArticlePage() {
 
   return (
     <>
-      <article className="content-shell max-w-3xl py-10 sm:py-14">
-        {a.category?.slug ? (
-          <Link
-            to="/category/$slug"
-            params={{ slug: a.category.slug }}
-            className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 font-sans text-[0.68rem] font-bold uppercase tracking-[0.12em] text-primary transition-colors hover:bg-primary/15"
-          >
-            {a.category.name}
-            {a.subcategory?.name ? ` · ${a.subcategory.name}` : ""}
-          </Link>
-        ) : null}
+      {/* Header Ad */}
+      <AdBanner ad={headerAd} position="header" />
 
-        <h1 className="mt-5 font-display text-3xl font-extrabold leading-[1.15] tracking-tight sm:text-4xl lg:text-5xl">
-          {a.title}
-        </h1>
-
-        {a.subtitle ? (
-          <p className="mt-4 text-lg font-normal leading-8 text-muted-foreground sm:text-xl">
-            {a.subtitle}
-          </p>
-        ) : null}
-
-        <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 border-y border-border py-4 font-sans text-xs text-muted-foreground">
-          {a.byline?.slug ? (
+      {/* ===== 2-Column Layout: Article + Sidebar ===== */}
+      <div className="content-shell grid grid-cols-1 gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-12">
+        {/* ---------- LEFT: Article ---------- */}
+        <article className="min-w-0">
+          {a.category?.slug ? (
             <Link
-              to="/byline/$slug"
-              params={{ slug: a.byline.slug }}
-              className="font-bold text-foreground transition-colors hover:text-primary"
+              to="/category/$slug"
+              params={{ slug: a.category.slug }}
+              className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 font-sans text-[0.68rem] font-bold uppercase tracking-[0.12em] text-primary transition-colors hover:bg-primary/15"
             >
-              {a.byline.name}
+              {a.category.name}
+              {a.subcategory?.name ? ` · ${a.subcategory.name}` : ""}
             </Link>
           ) : null}
-          <span>{formatDate(a.published_at)}</span>
-          <span className="text-border">·</span>
-          <span>{a.read_time} मिनट पढ़ें</span>
-          <span className="text-border">·</span>
-          <span>{a.views} बार देखा गया</span>
-        </div>
 
-        {a.featured_image ? (
-          <figure className="mt-8">
-            <img
-              src={a.featured_image}
-              alt={a.image_alt || a.title}
-              className="aspect-[16/9] w-full rounded-xl object-cover"
-            />
-            {a.image_alt ? (
-              <figcaption className="mt-2 text-center font-sans text-xs text-muted-foreground">
-                {a.image_alt}
-              </figcaption>
-            ) : null}
-          </figure>
-        ) : null}
+          <h1 className="mt-5 font-display text-3xl font-extrabold leading-[1.15] tracking-tight sm:text-4xl lg:text-5xl">
+            {a.title}
+          </h1>
 
-        {/* Content is authored by the publisher in their own admin panel. */}
-        <div className="article-body mt-9" dangerouslySetInnerHTML={{ __html: a.content }} />
+          {a.subtitle ? (
+            <p className="mt-4 text-lg font-normal leading-8 text-muted-foreground sm:text-xl">
+              {a.subtitle}
+            </p>
+          ) : null}
 
-        {a.tags?.length ? (
-          <div className="mt-12 flex flex-wrap gap-2 border-t border-border pt-6">
-            {a.tags.map((t) => (
+          <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 border-y border-border py-4 font-sans text-xs text-muted-foreground">
+            {a.byline?.slug ? (
               <Link
-                key={t.slug}
-                to="/news"
-                search={{ q: t.name }}
-                className="rounded-full bg-muted px-4 py-1.5 font-sans text-xs font-semibold text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+                to="/byline/$slug"
+                params={{ slug: a.byline.slug }}
+                className="font-bold text-foreground transition-colors hover:text-primary"
               >
-                #{t.name}
+                {a.byline.name}
               </Link>
-            ))}
+            ) : null}
+            <span>{formatDate(a.published_at)}</span>
+            <span className="text-border">·</span>
+            <span>{a.read_time} मिनट पढ़ें</span>
+            <span className="text-border">·</span>
+            <span>{a.views} बार देखा गया</span>
           </div>
-        ) : null}
-      </article>
 
-      <div className="content-shell max-w-3xl">
-        <DisplayAd size="leaderboard" />
+          {a.featured_image ? (
+            <figure className="mt-8">
+              <img
+                src={a.featured_image}
+                alt={a.image_alt || a.title}
+                className="aspect-[16/9] w-full rounded-xl object-cover"
+              />
+              {a.image_alt ? (
+                <figcaption className="mt-2 text-center font-sans text-xs text-muted-foreground">
+                  {a.image_alt}
+                </figcaption>
+              ) : null}
+            </figure>
+          ) : null}
+
+          {/* Content */}
+          <div
+            className="article-body mt-9"
+            dangerouslySetInnerHTML={{ __html: a.content }}
+          />
+
+          {/* Tags */}
+          {a.tags?.length ? (
+            <div className="mt-12 flex flex-wrap gap-2 border-t border-border pt-6">
+              {a.tags.map((t) => (
+                <Link
+                  key={t.slug}
+                  to="/news"
+                  search={{ q: t.name }}
+                  className="rounded-full bg-muted px-4 py-1.5 font-sans text-xs font-semibold text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+                >
+                  #{t.name}
+                </Link>
+              ))}
+            </div>
+          ) : null}
+        </article>
+
+        {/* ---------- RIGHT: Sidebar ---------- */}
+        <aside className="lg:sticky lg:top-24 lg:self-start">
+          {/* Sidebar Ad */}
+          <div className="mb-8">
+            <DisplayAd size="rectangle" />
+          </div>
+
+          {/* Related News */}
+          {a.related?.length ? (
+            <div className="rounded-xl border border-border bg-card p-5">
+              <h3 className="mb-5 flex items-center gap-2 font-sans text-sm font-extrabold uppercase tracking-[0.12em] text-foreground">
+                <span className="h-4 w-1 rounded-full bg-primary" />
+                संबंधित खबरें
+              </h3>
+              <div className="flex flex-col gap-5">
+                {a.related.slice(0, 5).map((n) => (
+                  <RelatedItem key={n.id} item={n} />
+                ))}
+              </div>
+            </div>
+          ) : null}
+
+          {/* Sidebar Ad #2 */}
+          <div className="mt-8">
+            <DisplayAd size="rectangle" />
+          </div>
+        </aside>
       </div>
 
+       
+      {/* ===== Full-Width Taboola / MGID Ad ===== */}
+      <section className="border-y border-border bg-muted/20 py-8">
+        <div className="content-shell">
+          <TaboolaWidget 
+            containerId="taboola-below-article-thumbnails" 
+            mode="thumbnails-a"
+            placement="Below Article Thumbnails"
+          />
+        </div>
+      </section>
+
+      <section className="border-y border-border bg-muted/20 py-8">
+        <div className="content-shell">
+          <VdoAiAd />
+        </div>
+      </section>
+
+      {/* ===== Full-Width Taboola / MGID Ad ===== */}
+      <section className="border-y border-border bg-muted/20 py-8">
+        <div className="content-shell">
+          {/* 
+            Replace this div with your Taboola / MGID widget script.
+            Example:
+            <div id="taboola-below-article-thumbnails" />
+            or
+            <div id="M885913ScriptRootC1234567" />
+          */}
+          <div className="webAds topads advertiseTxt" data-position="below-article">
+            <div className="advertise">
+              <span className="advertise-placeholder">
+                Taboola / MGID Widget — Below Article
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== Related News Grid (Bottom - kept for SEO) ===== */}
       {a.related?.length ? (
-        <section className="content-shell pb-8">
+        <section className="content-shell pb-8 pt-10 lg:hidden">
           <SectionTitle>संबंधित खबरें</SectionTitle>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {a.related.slice(0, 4).map((n) => (
@@ -189,5 +267,34 @@ function ArticlePage() {
 
       <Newsletter />
     </>
+  );
+}
+
+/* ===== Sidebar related news item ===== */
+function RelatedItem({ item }: { item: any }) {
+  return (
+    <Link
+      to="/article/$slug"
+      params={{ slug: item.slug }}
+      className="group flex gap-3"
+    >
+      {item.featured_image ? (
+        <div className="shrink-0 overflow-hidden rounded-md">
+          <img
+            src={item.featured_image}
+            alt={item.image_alt || item.title}
+            className="h-16 w-20 object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        </div>
+      ) : null}
+      <div className="min-w-0 flex-1">
+        <h4 className="line-clamp-2 font-display text-sm font-bold leading-snug text-foreground transition-colors group-hover:text-primary">
+          {item.title}
+        </h4>
+        <p className="mt-1 font-sans text-[0.68rem] text-muted-foreground">
+          {formatDate(item.published_at)}
+        </p>
+      </div>
+    </Link>
   );
 }

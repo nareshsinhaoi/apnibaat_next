@@ -4,6 +4,8 @@ import { BreakingStrip, LeadStories, NewsGrid } from "@/components/newsroom";
 import { Newsletter } from "@/components/site-chrome";
 import { categoriesQuery } from "@/lib/api";
 import { DisplayAd } from "@/components/google-ads";
+import { AdBanner } from "@/components/ad-banner";
+import { headerAd } from "@/lib/ads";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,10 +25,17 @@ export const Route = createFileRoute("/")({
 function Index() {
   const { data: cats } = useQuery(categoriesQuery());
   const top = (cats ?? []).filter((c) => c.parent_id === "0");
+   
+   
 
   return (
     <>
       <BreakingStrip />
+
+      {/* Advertisement Strip */}
+      <AdBanner ad={headerAd} position="header" />
+      {/* Advertisement Strip end here */}
+      
       <LeadStories />
 
       {/* Category chips */}
@@ -48,21 +57,25 @@ function Index() {
           </Link>
         ))}
       </div>
-
-      <NewsGrid title="नवीनतम समाचार" filters={{ per_page: 8 }} />
+      
+      <NewsGrid title="नवीनतम समाचार" filters={{ per_page: 8 }} viewAll={{ to: "/news" }} />
 
       {/* Ad slot between sections */}
-      <div className="content-shell">
-        <DisplayAd size="billboard" />
+      <div className="content-shell flex gap-2 overflow-x-auto py-4 [scrollbar-width:none] sm:flex-wrap">
+        <div className="webAds topads advertiseTxt" data-position="below-article">
+           
+            <DisplayAd size="billboard" />
+           
+        </div>
       </div>
 
       <div className="border-y border-border bg-muted/40">
-        <NewsGrid title="ट्रेंडिंग" filters={{ trending: true, per_page: 4 }} />
+        <NewsGrid title="ट्रेंडिंग" filters={{ trending: true, per_page: 4 }} viewAll={{ to: "/news" }} />
       </div>
 
       <Newsletter />
 
-      <NewsGrid title="संपादक की पसंद" filters={{ featured: true, per_page: 4 }} />
+      <NewsGrid title="संपादक की पसंद" filters={{ featured: true, per_page: 4 }} viewAll={{ to: "/news" }} />
     </>
   );
 }

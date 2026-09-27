@@ -2,6 +2,8 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { Search } from "lucide-react";
 import { NewsGrid } from "@/components/newsroom";
+import { AdBanner } from "@/components/ad-banner";
+import { headerAd } from "@/lib/ads";
 
 export const Route = createFileRoute("/news")({
   validateSearch: z.object({
@@ -69,6 +71,9 @@ function NewsListing() {
           </form>
         </div>
       </div>
+
+      <AdBanner ad={headerAd} position="header" />
+      
       <NewsGrid
         title={q ? "खोज परिणाम" : "समाचार सूची"}
         filters={{ page, per_page: 12, ...(q ? { q } : {}) }}

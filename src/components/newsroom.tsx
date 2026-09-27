@@ -257,18 +257,32 @@ export function NewsGrid({
   filters,
   paginate = false,
   onPage,
+  viewAll,
 }: {
   title: string;
   filters: NewsFilters;
   paginate?: boolean;
   onPage?: (p: number) => void;
+  viewAll?: { to: string; params?: Record<string, string>; search?: Record<string, unknown> };
 }) {
   const { data, isLoading, isError } = useQuery(newsQuery(filters));
   const skeletonCount = filters.per_page && filters.per_page < 4 ? filters.per_page : 4;
 
   return (
     <section className="content-shell py-10 sm:py-14">
-      <SectionTitle>{title}</SectionTitle>
+      <div className="mb-6 flex items-center justify-between gap-4 border-b border-border pb-3">
+        <h2 className="section-rule">{title}</h2>
+        {viewAll ? (
+          <Link
+            to={viewAll.to as never}
+            params={viewAll.params as never}
+            search={viewAll.search as never}
+            className="shrink-0 font-sans text-[0.68rem] font-bold uppercase tracking-wide text-primary transition-opacity hover:opacity-80"
+          >
+            सभी देखें →
+          </Link>
+        ) : null}
+      </div>
 
       {isLoading ? (
         <NewsGridSkeleton count={skeletonCount} />
