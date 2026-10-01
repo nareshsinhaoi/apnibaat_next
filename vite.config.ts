@@ -17,8 +17,28 @@
 // });
 
 
+// import { defineConfig } from "vite";
+// import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+// import viteReact from "@vitejs/plugin-react";
+// import tsconfigPaths from "vite-tsconfig-paths";
+// import tailwindcss from "@tailwindcss/vite";
+
+// export default defineConfig({
+//   plugins: [
+//     tailwindcss(),
+//     tsconfigPaths({ projects: ["./tsconfig.json"] }),
+//     tanstackStart({
+//       // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
+//       // nitro/vite builds from this
+//       server: { entry: "server" },
+//     }),
+//     viteReact(),
+//   ],
+// });
+
 import { defineConfig } from "vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import { nitro } from "nitro/vite";
 import viteReact from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 import tailwindcss from "@tailwindcss/vite";
@@ -28,19 +48,9 @@ export default defineConfig({
     tailwindcss(),
     tsconfigPaths({ projects: ["./tsconfig.json"] }),
     tanstackStart({
-      // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-      // nitro/vite builds from this
       server: { entry: "server" },
     }),
+    nitro(), // <-- This generates the .output folder
     viteReact(),
   ],
 });
-
-// import { defineConfig } from 'vite'
-// import { tanstackStart } from '@tanstack/react-start/plugin/vite'
-// import { nitro } from 'nitro/vite'
-// import viteReact from '@vitejs/plugin-react'
-
-// export default defineConfig({
-//   plugins: [tanstackStart(), nitro(), viteReact()],
-// })
