@@ -28,7 +28,7 @@ export function AdBanner({ ad, position = "header", className = "" }: Props) {
                   <img
                     src={ad.desktop_image}
                     alt={ad.alt || "Advertisement"}
-                    className="block h-auto w-full object-contain"
+                    className="block h-auto w-full object-contain   dark:invert"
                   />
                 </a>
               )}
@@ -43,7 +43,7 @@ export function AdBanner({ ad, position = "header", className = "" }: Props) {
                   <img
                     src={ad.mobile_image}
                     alt={ad.alt || "Advertisement"}
-                    className="block h-auto w-full object-contain"
+                    className="block h-auto w-full object-contain dark:invert" 
                   />
                 </a>
               )}

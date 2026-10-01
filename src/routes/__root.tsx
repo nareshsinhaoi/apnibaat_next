@@ -14,7 +14,8 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteFooter, SiteHeader, ScrollToTop } from "../components/site-chrome";
 import { AnchorAd, InterstitialAd } from "@/components/google-ads";
 
-const SITE_URL = "https://apnibaat.com";
+const SITE_URL = "https://apnibaat.modulelabs.in";
+const OG_IMG = "https://apnibaat.modulelabs.in/assets/images/apni-baat-logo.png";
 const Ad_SITE_URL = "https://www.maryadainvestment.in";
 const GPT_ACCOUNT = "/23135356965"; // replace with your network/unit path
 
@@ -84,7 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
+      { name: "viewport", content: "width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" },
       { title: "अपनीबात — हिंदी समाचार और विश्लेषण" },
       {
         name: "description",
@@ -100,6 +101,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "अपनीबात — हिंदी समाचार और विश्लेषण" },
       { property: "og:description", content: "स्वतंत्र हिंदी समाचार और गहन विश्लेषण।" },
       { property: "og:url", content: SITE_URL },
+      { property: "og:image", content: OG_IMG },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@apnibaat" },
     ],
@@ -158,6 +160,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             ).addService(g.pubads());
 
             // Anchor + Interstitial are disabled for now — uncomment when ready.
+            
             // ads.anchorSlot = g.defineSlot(
             //   '${GPT_ACCOUNT}/Anchor',
             //   [[300, 600], [300, 100], [300, 250]],

@@ -8,6 +8,7 @@ import { AdBanner } from "@/components/ad-banner";
 import { headerAd } from "@/lib/ads";
 import { TaboolaWidget } from '@/components/taboola-widget';
 import { VdoAiAd } from "@/components/vdo-ai-ad";
+import { ArticleWithAds } from "@/components/article-with-ads"
 
 const SITE_URL = "https://apnibaat.com";
 
@@ -121,10 +122,10 @@ function ArticlePage() {
             </Link>
           ) : null}
 
-          <h1 className="mt-5 font-display text-3xl font-extrabold leading-[1.15] tracking-tight sm:text-4xl lg:text-5xl">
+          <h1 className="mt-5 w-full font-display text-3xl font-extrabold leading-[1.5] tracking-tight sm:text-3xl lg:text-3xl">
             {a.title}
           </h1>
-
+          
           {a.subtitle ? (
             <p className="mt-4 text-lg font-normal leading-8 text-muted-foreground sm:text-xl">
               {a.subtitle}
@@ -164,9 +165,21 @@ function ArticlePage() {
           ) : null}
 
           {/* Content */}
-          <div
+          {/* <div
             className="article-body mt-9"
             dangerouslySetInnerHTML={{ __html: a.content }}
+          /> */}
+          {/* Content with 3 in-article ads */}
+          
+          <ArticleWithAds
+            html={a.content}
+            adPositions={[3, 6, 10]}
+            renderAd={(index) => (
+              //<DisplayAd size="leaderboard" />
+              // or use any of these:
+              // <div id={`div-gpt-ad-inline-${index}`} />
+              <AdBanner ad={headerAd} position={`inline-${index}`} />
+            )}
           />
 
           {/* Tags */}

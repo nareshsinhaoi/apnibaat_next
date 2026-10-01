@@ -302,14 +302,14 @@ export function SiteFooter() {
               alt="अपनीबात"
               width={44}
               height={44}
-              className="h-10 w-10 object-contain"
+              className="h-10 w-10 object-contain dark:brightness-0 dark:invert"
             />
             <span className="ml-2 font-display text-lg font-extrabold text-foreground">
               अपनीबात
             </span>
           </Link>
           <p className="mt-3 max-w-xs text-sm leading-6 text-muted-foreground">
-            स्वतंत्र हिंदी पत्रकारिता, समाचार और गहन विश्लेषण।
+            स्वतंत्र हिंदी पत्रकारिता, समाचारों का गहन विश्लेषण।
           </p>
         </div>
 

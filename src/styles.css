@@ -527,3 +527,24 @@ body:has(#div-gpt-ad-anchor:not(:empty)) footer {
 .dark .advertise-placeholder {
   color: #4a4a55;
 }
+
+.article-inline-ad {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border, #eee);
+  border-bottom: 1px solid var(--border, #eee);
+  margin: 28px 0;
+}
+
+.article-inline-ad::before {
+  content: "advertisement";
+  position: absolute;
+  top: 2px;
+  font-size: 7px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #999;
+}

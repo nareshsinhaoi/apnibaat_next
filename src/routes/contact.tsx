@@ -29,16 +29,18 @@ function ContactPage() {
       </p>
 
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
-        <ContactCard icon={<Mail className="size-5" />} title="सामान्य पूछताछ">
+        <ContactCard icon={<Mail className="size-5" />} title="सामान्य पूछताछ/न्यूज़रूम - टिप्स">
           <a href="mailto:contact@apnibaat.com" className="text-primary hover:underline">
             contact@apnibaat.com
           </a>
         </ContactCard>
-        <ContactCard icon={<Mail className="size-5" />} title="न्यूज़रूम / टिप्स">
+        
+        {/* <ContactCard icon={<Mail className="size-5" />} title="न्यूज़रूम / टिप्स">
           <a href="mailto:newsroom@apnibaat.com" className="text-primary hover:underline">
             newsroom@apnibaat.com
           </a>
-        </ContactCard>
+        </ContactCard> */}
+
         <ContactCard icon={<Mail className="size-5" />} title="विज्ञापन">
           <a href="mailto:ads@apnibaat.com" className="text-primary hover:underline">
             ads@apnibaat.com
