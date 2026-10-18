@@ -6,17 +6,22 @@ import { formatDate, newsDetailQuery } from "@/lib/api";
 import { DisplayAd } from "@/components/google-ads";
 import { AdBanner } from "@/components/ad-banner";
 import { headerAd } from "@/lib/ads";
-import { TaboolaWidget } from '@/components/taboola-widget';
+import { TaboolaWidget } from "@/components/taboola-widget";
 import { VdoAiAd } from "@/components/vdo-ai-ad";
-import { ArticleWithAds } from "@/components/article-with-ads"
+import { ArticleWithAds } from "@/components/article-with-ads";
+import { StoryNav } from "@/components/story-nav";
 
 const SITE_URL = "https://apnibaat.com";
 
 export const Route = createFileRoute("/article/$slug")({
   loader: ({ context, params }) =>
-    context.queryClient.ensureQueryData(newsDetailQuery(params.slug)).catch(() => null),
+    context.queryClient
+      .ensureQueryData(newsDetailQuery(params.slug))
+      .catch(() => null),
   head: ({ loaderData: a, params }) => {
-    const title = a ? `${a.meta_title || a.title} — अपनीबात` : "समाचार विवरण — अपनीबात";
+    const title = a
+      ? `${a.meta_title || a.title} — अपनीबात`
+      : "समाचार विवरण — अपनीबात";
     const desc =
       a?.meta_description ||
       a?.excerpt?.slice(0, 160) ||
@@ -48,7 +53,9 @@ export const Route = createFileRoute("/article/$slug")({
         ...(a?.category?.name
           ? [{ property: "article:section", content: a.category.name }]
           : []),
-        ...(a?.meta_keywords ? [{ name: "keywords", content: a.meta_keywords }] : []),
+        ...(a?.meta_keywords
+          ? [{ name: "keywords", content: a.meta_keywords }]
+          : []),
         { name: "twitter:card", content: "summary_large_image" },
       ],
       links: [{ rel: "canonical", href: url }],
@@ -125,7 +132,7 @@ function ArticlePage() {
           <h1 className="mt-5 w-full font-display text-3xl font-extrabold leading-[1.5] tracking-tight sm:text-3xl lg:text-3xl">
             {a.title}
           </h1>
-          
+
           {a.subtitle ? (
             <p className="mt-4 text-lg font-normal leading-8 text-muted-foreground sm:text-xl">
               {a.subtitle}
@@ -164,20 +171,11 @@ function ArticlePage() {
             </figure>
           ) : null}
 
-          {/* Content */}
-          {/* <div
-            className="article-body mt-9"
-            dangerouslySetInnerHTML={{ __html: a.content }}
-          /> */}
-          {/* Content with 3 in-article ads */}
-          
+          {/* Content with in-article ads */}
           <ArticleWithAds
             html={a.content}
             adPositions={[3, 6, 10]}
             renderAd={(index) => (
-              //<DisplayAd size="leaderboard" />
-              // or use any of these:
-              // <div id={`div-gpt-ad-inline-${index}`} />
               <AdBanner ad={headerAd} position={`inline-${index}`} />
             )}
           />
@@ -197,6 +195,11 @@ function ArticlePage() {
               ))}
             </div>
           ) : null}
+
+          {/* Prev / Next navigation */}
+          <div className="mt-10">
+            <StoryNav slug={slug} />
+          </div>
         </article>
 
         {/* ---------- RIGHT: Sidebar ---------- */}
@@ -228,28 +231,28 @@ function ArticlePage() {
         </aside>
       </div>
 
-       
-      {/* ===== Full-Width Taboola / MGID Ad ===== */}
+      {/* ===== Full-Width Taboola Ad ===== */}
       <section className="border-y border-border bg-muted/20 py-8">
         <div className="content-shell">
-          <TaboolaWidget 
-            containerId="taboola-below-article-thumbnails" 
+          <TaboolaWidget
+            containerId="taboola-below-article-thumbnails"
             mode="thumbnails-a"
             placement="Below Article Thumbnails"
           />
         </div>
       </section>
 
+      {/* ===== Vdo.ai Ad ===== */}
       <section className="border-y border-border bg-muted/20 py-8">
         <div className="content-shell">
           <VdoAiAd />
         </div>
       </section>
 
-      {/* ===== Full-Width Taboola / MGID Ad ===== */}
+      {/* ===== Full-Width MGID / Taboola fallback ===== */}
       <section className="border-y border-border bg-muted/20 py-8">
         <div className="content-shell">
-          {/* 
+          {/*
             Replace this div with your Taboola / MGID widget script.
             Example:
             <div id="taboola-below-article-thumbnails" />
@@ -266,7 +269,7 @@ function ArticlePage() {
         </div>
       </section>
 
-      {/* ===== Related News Grid (Bottom - kept for SEO) ===== */}
+      {/* ===== Related News Grid (mobile only, SEO) ===== */}
       {a.related?.length ? (
         <section className="content-shell pb-8 pt-10 lg:hidden">
           <SectionTitle>संबंधित खबरें</SectionTitle>
