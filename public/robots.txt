@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: http://localhost:3000/sitemap.xml
+Sitemap: https://apnibaat-sze0.onrender.com/sitemap.xml
