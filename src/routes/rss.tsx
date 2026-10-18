@@ -22,18 +22,18 @@ function RssPage() {
       <div className="article-body mt-8">
         <p>अपनीबात की फ़ीड को अपने पसंदीदा RSS रीडर में सब्सक्राइब करें।</p>
         <ul>
-          <li>
+          {/* <li>
             <strong>मुख्य फ़ीड:</strong>{" "}
             <a href="/rss.xml">/rss.xml</a>
-          </li>
+          </li> */}
           <li>
             <strong>सभी खबरें:</strong>{" "}
-            <a href="/feed/news.xml">/feed/news.xml</a>
+            <a href="/sitemap.xml">/sitemap.xml</a>
           </li>
-          <li>
+          {/* <li>
             <strong>श्रेणीवार:</strong>{" "}
             <code>/feed/category/&lt;slug&gt;.xml</code>
-          </li>
+          </li> */}
         </ul>
       </div>
     </article>

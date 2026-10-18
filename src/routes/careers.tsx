@@ -74,7 +74,7 @@ function CareersPage() {
               </p>
             </div>
             <a
-              href="mailto:careers@apnibaat.com"
+              href="mailto:info@modulelabs.in" 
               className="inline-flex w-fit items-center rounded-full bg-primary px-5 py-2 font-sans text-xs font-bold text-primary-foreground transition-opacity hover:opacity-90"
             >
               आवेदन करें
@@ -84,7 +84,7 @@ function CareersPage() {
       </div>
 
       <p className="mt-5 text-sm text-muted-foreground">
-        अपना बायोडाटा, तीन लेखन नमूने और अपेक्षित वेतन <a href="mailto:careers@apnibaat.com" className="text-primary hover:underline">careers@apnibaat.com</a> पर भेजें।
+        अपना बायोडाटा, तीन लेखन नमूने और अपेक्षित वेतन <a href="mailto:info@modulelabs.in" className="text-primary hover:underline">info@modulelabs.in</a> पर भेजें।
         चयनित उम्मीदवारों से एक सप्ताह के भीतर संपर्क किया जाएगा।
       </p>
     </div>

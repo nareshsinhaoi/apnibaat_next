@@ -30,8 +30,8 @@ function ContactPage() {
 
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
         <ContactCard icon={<Mail className="size-5" />} title="सामान्य पूछताछ/न्यूज़रूम - टिप्स">
-          <a href="mailto:contact@apnibaat.com" className="text-primary hover:underline">
-            contact@apnibaat.com
+          <a href="mailto:info@modulelabs.in" className="text-primary hover:underline">
+            info@modulelabs.in
           </a>
         </ContactCard>
         
@@ -42,15 +42,15 @@ function ContactPage() {
         </ContactCard> */}
 
         <ContactCard icon={<Mail className="size-5" />} title="विज्ञापन">
-          <a href="mailto:ads@apnibaat.com" className="text-primary hover:underline">
-            ads@apnibaat.com
+          <a href="mailto:info@modulelabs.in" className="text-primary hover:underline">
+            info@modulelabs.in
           </a>
         </ContactCard>
         <ContactCard icon={<Phone className="size-5" />} title="फ़ोन">
-          <span>+91 11 4567 8900</span>
+          <span>+91 888.233.133.6</span>
         </ContactCard>
         <ContactCard icon={<MapPin className="size-5" />} title="कार्यालय">
-          <span>तीसरी मंज़िल, DLF साइबर सिटी, गुरुग्राम, हरियाणा 122002</span>
+          <span>तीसरी मंज़िल, शाइन सिटी, मयूर विहार फेज 1, दिल्ली 110091</span>
         </ContactCard>
         <ContactCard icon={<Clock className="size-5" />} title="कार्य-समय">
           <span>सोमवार–शुक्रवार, सुबह 10 – शाम 6 बजे</span>

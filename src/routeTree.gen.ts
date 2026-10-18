@@ -18,6 +18,7 @@ import { Route as NewsRouteImport } from './routes/news'
 import { Route as NewsletterRouteImport } from './routes/newsletter'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RssRouteImport } from './routes/rss'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ArticleSlugRouteImport } from './routes/article.$slug'
 import { Route as BylineSlugRouteImport } from './routes/byline.$slug'
@@ -69,6 +70,11 @@ const RssRoute = RssRouteImport.update({
   path: '/rss',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/newsletter': typeof NewsletterRoute
   '/privacy': typeof PrivacyRoute
   '/rss': typeof RssRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/article/$slug': typeof ArticleSlugRoute
   '/byline/$slug': typeof BylineSlugRoute
@@ -121,6 +128,7 @@ export interface FileRoutesByTo {
   '/newsletter': typeof NewsletterRoute
   '/privacy': typeof PrivacyRoute
   '/rss': typeof RssRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/article/$slug': typeof ArticleSlugRoute
   '/byline/$slug': typeof BylineSlugRoute
@@ -138,6 +146,7 @@ export interface FileRoutesById {
   '/newsletter': typeof NewsletterRoute
   '/privacy': typeof PrivacyRoute
   '/rss': typeof RssRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/article/$slug': typeof ArticleSlugRoute
   '/byline/$slug': typeof BylineSlugRoute
@@ -156,6 +165,7 @@ export interface FileRouteTypes {
     | '/newsletter'
     | '/privacy'
     | '/rss'
+    | '/sitemap.xml'
     | '/terms'
     | '/article/$slug'
     | '/byline/$slug'
@@ -172,6 +182,7 @@ export interface FileRouteTypes {
     | '/newsletter'
     | '/privacy'
     | '/rss'
+    | '/sitemap.xml'
     | '/terms'
     | '/article/$slug'
     | '/byline/$slug'
@@ -188,6 +199,7 @@ export interface FileRouteTypes {
     | '/newsletter'
     | '/privacy'
     | '/rss'
+    | '/sitemap.xml'
     | '/terms'
     | '/article/$slug'
     | '/byline/$slug'
@@ -205,6 +217,7 @@ export interface RootRouteChildren {
   NewsletterRoute: typeof NewsletterRoute
   PrivacyRoute: typeof PrivacyRoute
   RssRoute: typeof RssRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   ArticleSlugRoute: typeof ArticleSlugRoute
   BylineSlugRoute: typeof BylineSlugRoute
@@ -277,6 +290,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RssRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms': {
       id: '/terms'
       path: '/terms'
@@ -325,6 +345,7 @@ const rootRouteChildren: RootRouteChildren = {
   NewsletterRoute: NewsletterRoute,
   PrivacyRoute: PrivacyRoute,
   RssRoute: RssRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   ArticleSlugRoute: ArticleSlugRoute,
   BylineSlugRoute: BylineSlugRoute,
