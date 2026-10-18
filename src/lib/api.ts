@@ -111,6 +111,19 @@ export function formatDate(iso: string) {
   const d = new Date(iso);
   return isNaN(d.getTime()) ? "" : d.toLocaleDateString("hi-IN", { day: "numeric", month: "long", year: "numeric" });
 }
+// ---------- Sitemap ----------
+// Returns raw XML string. We don't use apiGet here because sitemaps are XML, not JSON.
+export async function fetchSitemapXML(): Promise<string> {
+  const response = await fetch(`${API_BASE_URL}${API_PATHS.sitemap}`, {
+    headers: {
+      Accept: "application/xml, text/xml, */*",
+    },
+  });
+  if (!response.ok) {
+    throw new Error(`Failed to fetch sitemap: ${response.status}`);
+  } 
+  return response.text();
+}
 
 // ---------- Prev / Next navigation ----------
 export interface NewsNeighbor {

@@ -15,10 +15,13 @@ export const Route = createFileRoute("/advertise")({
 
 function AdvertisePage() {
   const formats = [
-    { name: "लीडरबोर्ड बैनर", spec: "970×250, होमपेज व लेख पृष्ठ", price: "₹18,000 / सप्ताह" },
-    { name: "इन-आर्टिकल नेटिव", spec: "लेख के भीतर, स्क्रॉल-अनुकूल", price: "₹25,000 / सप्ताह" },
-    { name: "स्पॉन्सर्ड स्टोरी", spec: "1200 शब्द तक, ब्रांड-लेबल सहित", price: "₹40,000 / लेख" },
-    { name: "न्यूज़लेटर स्लॉट", spec: "दैनिक न्यूज़लेटर में एकल स्लॉट", price: "₹12,000 / सप्ताह" },
+    { name: "लीडरबोर्ड/अन्य बैनर", spec: "किसी भी आकार, होमपेज व लेख पृष्ठ", price: "₹20,000 / वर्ष" },
+    { name: "लीडरबोर्ड बैनर", spec: "970×250, होमपेज व लेख पृष्ठ", price: "₹1,000 / सप्ताह" },
+    { name: "इन-आर्टिकल नेटिव", spec: "लेख के भीतर, स्क्रॉल-अनुकूल", price: "₹20,000 / वर्ष" },
+    { name: "इन-आर्टिकल नेटिव", spec: "लेख के भीतर, स्क्रॉल-अनुकूल", price: "₹1,000 / सप्ताह" },
+    { name: "स्पॉन्सर्ड स्टोरी", spec: "1200 शब्द तक, ब्रांड-लेबल सहित", price: "₹10,000 / लेख" },
+    { name: "आपका विचार", spec: "1200 शब्द तक, ब्रांड-लेबल सहित", price: "₹3,000 / लेख" },
+    //{ name: "न्यूज़लेटर स्लॉट", spec: "दैनिक न्यूज़लेटर में एकल स्लॉट", price: "₹12,000 / सप्ताह" },
   ];
 
   return (
@@ -36,7 +39,7 @@ function AdvertisePage() {
           जो हिंदी भाषी उपभोक्ताओं तक सीधे और भरोसेमंद माध्यम से पहुँचना चाहते हैं।
         </p>
         <h2>विज्ञापन प्रारूप और दरें</h2>
-        <div className="not-prose overflow-x-auto rounded-lg border border-border">
+        <div className="not-prose overflow-x-auto rounded-lg border-0 border-border">
           <table className="w-full text-left text-sm">
             <thead className="bg-muted/50 font-sans text-xs uppercase tracking-wide">
               <tr>
@@ -68,8 +71,8 @@ function AdvertisePage() {
         <h2>संपर्क करें</h2>
         <p>
           मीडिया किट, केस-स्टडी और कस्टम पैकेज के लिए{" "}
-          <a href="mailto:ads@modulelabs.com">ads@modulelabs.com</a> पर लिखें या हमारी सेल्स टीम से
-          +91 11 4567 8900 पर संपर्क करें।
+          <a href="mailto:info@modulelabs.in">info@modulelabs.in</a> पर लिखें या हमारी सेल्स टीम से
+          +91 888.233.133.6 पर संपर्क करें।
         </p>
       </div>
     </article>

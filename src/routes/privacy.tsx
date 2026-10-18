@@ -67,7 +67,7 @@ function TermsPage() {
         <p>
           हम बिना पूर्व सूचना के इन शर्तों में परिवर्तन का अधिकार सुरक्षित रखते हैं। नवीनतम संस्करण
           सदैव इसी पृष्ठ पर उपलब्ध रहेगा। प्रश्नों के लिए{" "}
-          <a href="mailto:legal@apnibaat.com">legal@apnibaat.com</a> पर लिखें।
+          <a href="mailto:info@modulelabs.in">info@modulelabs.in</a> पर लिखें।
         </p>
       </div>
     </article>
