@@ -2,8 +2,8 @@ import { queryOptions } from "@tanstack/react-query";
 import { fetchApi } from "./api.functions";
 
 // Single place for all backend API paths.
-//export const API_BASE_URL = "https://apnibaat.modulelabs.in/api";
-export const API_BASE_URL = "http://localhost:4322/api";
+export const API_BASE_URL = "https://apnibaat.modulelabs.in/api";
+//export const API_BASE_URL = "http://localhost:4322/api";
 
 export const API_PATHS = {
   bylines: "/bylines",
@@ -145,36 +145,36 @@ export function newsNeighborsQuery(slug: string) {
     },
   });
 }
-export function newsNeighborsQuery2222(slug: string) {
-  return queryOptions<{ prev: NewsNeighbor | null; next: NewsNeighbor | null }>({
-    queryKey: ["news-neighbors", slug],
-    staleTime: 60_000,
-    queryFn: async () => {
-      const [prevRes, nextRes] = await Promise.all([
-        apiFetch<any>(`/news?before=${encodeURIComponent(slug)}&limit=1`),
-        apiFetch<any>(`/news?after=${encodeURIComponent(slug)}&limit=1`),
-      ]);
+// export function newsNeighborsQuery2222(slug: string) {
+//   return queryOptions<{ prev: NewsNeighbor | null; next: NewsNeighbor | null }>({
+//     queryKey: ["news-neighbors", slug],
+//     staleTime: 60_000,
+//     queryFn: async () => {
+//       const [prevRes, nextRes] = await Promise.all([
+//         apiFetch<any>(`/news?before=${encodeURIComponent(slug)}&limit=1`),
+//         apiFetch<any>(`/news?after=${encodeURIComponent(slug)}&limit=1`),
+//       ]);
 
-      console.log("[newsNeighborsQuery] prevRes:", prevRes);
-      console.log("[newsNeighborsQuery] nextRes:", nextRes);
+//       console.log("[newsNeighborsQuery] prevRes:", prevRes);
+//       console.log("[newsNeighborsQuery] nextRes:", nextRes);
 
-      // Handle both shapes: apiFetch may return the array directly,
-      // or the full { data: [...] } envelope.
-      const prevArr = Array.isArray(prevRes)
-        ? prevRes
-        : Array.isArray(prevRes?.data)
-          ? prevRes.data
-          : [];
-      const nextArr = Array.isArray(nextRes)
-        ? nextRes
-        : Array.isArray(nextRes?.data)
-          ? nextRes.data
-          : [];
+//       // Handle both shapes: apiFetch may return the array directly,
+//       // or the full { data: [...] } envelope.
+//       const prevArr = Array.isArray(prevRes)
+//         ? prevRes
+//         : Array.isArray(prevRes?.data)
+//           ? prevRes.data
+//           : [];
+//       const nextArr = Array.isArray(nextRes)
+//         ? nextRes
+//         : Array.isArray(nextRes?.data)
+//           ? nextRes.data
+//           : [];
 
-      return {
-        prev: prevArr[0] ?? null,
-        next: nextArr[0] ?? null,
-      };
-    },
-  });
-}
+//       return {
+//         prev: prevArr[0] ?? null,
+//         next: nextArr[0] ?? null,
+//       };
+//     },
+//   });
+// }
