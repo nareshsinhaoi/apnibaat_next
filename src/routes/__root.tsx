@@ -18,6 +18,7 @@ const SITE_URL = "https://apnibaat.modulelabs.in";
 const OG_IMG = "https://apnibaat.modulelabs.in/assets/images/apni-baat-logo.png";
 const Ad_SITE_URL = "https://www.maryadainvestment.in";
 const GPT_ACCOUNT = "/23135356965"; // replace with your network/unit path
+const GA_ID = "G-YCGJDV1GLK"; // Google Analytics Measurement ID
 
 function NotFoundComponent() {
   return (
@@ -113,6 +114,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "preconnect", href: "https://securepubads.g.doubleclick.net" },
       { rel: "preconnect", href: "https://pagead2.googlesyndication.com" },
+      { rel: "preconnect", href: "https://www.googletagmanager.com" },
       { rel: "dns-prefetch", href: "https://tpc.googlesyndication.com" },
       {
         rel: "stylesheet",
@@ -120,7 +122,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     scripts: [
-      // 0. Taboola Loader Script (ADD THIS)
+      // 0. Google Analytics (gtag.js) — Loader
+      {
+        src: `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`,
+        async: true,
+      },
+      // 1. Google Analytics (gtag.js) — Configuration
+      {
+        children: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_ID}');
+        `,
+      },
+      // 2. Taboola Loader Script
       {
         children: `
           window._taboola = window._taboola || [];
@@ -139,12 +155,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           }
         `,
       },
-      // 1. GPT loader — must come before the config script
+      // 3. GPT loader — must come before the config script
       {
         src: "https://securepubads.g.doubleclick.net/tag/js/gpt.js",
         async: true,
       },
-      // 2. GPT slot configuration
+      // 4. GPT slot configuration
       {
         children: `
           window.googletag = window.googletag || {cmd: []};
@@ -179,7 +195,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           });
         `,
       },
-      // 3. Organization structured data
+      // 5. Organization structured data
       {
         type: "application/ld+json",
         children: JSON.stringify({
