@@ -87,7 +87,7 @@ The two layers communicate over a JSON API (`/api/*`). Content authors work excl
 - ✅ Inline advertisement injection (after paragraph 3, 6, 10)
 
 ### Content Ingestion
-- ✅ **IAINIS API integration** — bulk-import news from `cms.iainisinieiwis.in`
+- ✅ **IAINIS API integration** — bulk-import news from `xyz.inews.in`
 - ✅ Deduplication by external ID
 - ✅ Automatic tag extraction from API payload
 - ✅ Preserves original image URLs
